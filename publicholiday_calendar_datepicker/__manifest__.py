@@ -13,6 +13,7 @@
     "css": ['static/src/css/style.css'],
     "price": 19.99,
     'currency': 'USD',
+    'images': ['static/description/calendar.png'],
     "data": [
         "data/data.xml",
     ],
