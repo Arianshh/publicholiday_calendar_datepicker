@@ -15,7 +15,8 @@ class HolidayControllers(http.Controller):
 
     @http.route('/publicholiday_calendar_datepicker/is_holiday', type='http', auth='public', website=True)
     def is_holiday(self, event_id):
-        holiday_id = request.env['resource.calendar.leaves'].sudo().search([('meeting_id', '=', int(event_id))],                                                                           limit=1)
+        holiday_id = request.env['resource.calendar.leaves'].sudo().search(
+            [('meeting_id', '=', int(event_id)), ('resource_id', '=', False)], limit=1)
         return request.make_response(
             data=json.dumps(bool(holiday_id)),
             headers=[('Content-Type', 'application/json')]

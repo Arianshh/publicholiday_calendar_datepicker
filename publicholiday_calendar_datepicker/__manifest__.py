@@ -2,18 +2,16 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Public Holiday Calendar",
+    "name": "Public Holiday Calendar/Datepicker",
     "summary": "Public holidays color changes in datepicker and calendar.",
     "version": "15.0",
     "license": "LGPL-3",
-    "category": "custom",
+    "category": "Human Resources/Time Off",
     "author": "Arian Shariat",
     "website": "https://github.com/Arianshh",
     "depends": ["hr_holidays"],
     "css": ['static/src/css/style.css'],
-    "price": 19.99,
-    'currency': 'USD',
-    'images': ['static/description/calendar.png'],
+    'images': ['static/description/header.jpeg'],
     "data": [
         "data/data.xml",
     ],

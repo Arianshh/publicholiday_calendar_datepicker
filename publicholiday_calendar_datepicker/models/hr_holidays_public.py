@@ -6,7 +6,7 @@ class CalendarEvent(models.Model):
     _inherit = "calendar.event"
 
     def write(self, vals):
-        holiday_ids = self.env['resource.calendar.leaves'].search([('meeting_id', '=', self.id)])
+        holiday_ids = self.env['resource.calendar.leaves'].search([('meeting_id', '=', self.id), ('resource_id', '=', False)])
         if holiday_ids:
             users_obj = self.env['res.users']
             access_meeting = False

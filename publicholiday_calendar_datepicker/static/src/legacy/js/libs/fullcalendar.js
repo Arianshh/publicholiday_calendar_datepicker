@@ -72,8 +72,6 @@ odoo.define('publicholiday_calendar_datepicker.fullcalendar', function (require)
                     this.el.classList.add('fc-readonly-year-view');
                 }
                 this.months = [];
-                const currentMonthNumber = (new Date()).getMonth();
-                let currentMonthEl = undefined;
                 for (let monthNumber = 0; monthNumber < 12; monthNumber++) {
                     const monthDate = new Date(this.currentDate.getFullYear(), monthNumber);
                     const monthShortName = moment(monthDate).format('MMM').toLowerCase();
@@ -86,13 +84,6 @@ odoo.define('publicholiday_calendar_datepicker.fullcalendar', function (require)
                     const calendar = this._createMonthCalendar(el, monthDate);
                     this.months.push({el, calendar});
                     calendar.render();
-                    if (monthNumber === currentMonthNumber) {
-                        currentMonthEl = el;
-                    }
-                }
-
-                if (currentMonthEl !== undefined) {
-                    currentMonthEl.scrollIntoView();
                 }
             }
 
@@ -134,8 +125,9 @@ odoo.define('publicholiday_calendar_datepicker.fullcalendar', function (require)
             renderDates() {
                 this.events = this._computeEvents();
                 for (const [monthNumber, {calendar}] of Object.entries(this.months)) {
-                    const monthDate = new Date(this.currentDate.getFullYear(), monthNumber);
-                    calendar.gotoDate(monthDate);
+                    // /!\ TASHILGOSTAR IMP: to be compatible with jalali calendar system.
+                    const dateString = moment(this.currentDate).jYear() + "/" + (parseInt(monthNumber) + 1) + "/1";
+                    calendar.gotoDate(moment(dateString, "jYYYY/jM/jD").toDate());
                 }
                 this._setCursorOnEventDates();
                 this.datesRendered = true;
@@ -184,6 +176,7 @@ odoo.define('publicholiday_calendar_datepicker.fullcalendar', function (require)
                     titleFormat: {month: 'short', year: 'numeric'},
                     height: 0,
                     contentHeight: 0,
+                    weekNumbers: false,
                     showNonCurrentDates: false,
                     views: {
                         dayGridMonth: {
@@ -240,10 +233,12 @@ odoo.define('publicholiday_calendar_datepicker.fullcalendar', function (require)
              */
             _onYearDateClick(info) {
                 const calendar = this.context.calendar;
-                const events = this.events
+                const events = Object.values(this.events)
                     .filter(event => {
-                        const start = moment(event.start);
-                        const end = moment(event.end);
+                        const startUTC = calendar.dateEnv.toDate(event._instance.range.start);
+                        const endUTC = calendar.dateEnv.toDate(event._instance.range.end);
+                        const start = moment(startUTC);
+                        const end = moment(endUTC);
                         const inclusivity = start.isSame(end, 'day') ? '[]' : '[)';
                         return moment(info.date).isBetween(start, end, 'day', inclusivity);
                     })
