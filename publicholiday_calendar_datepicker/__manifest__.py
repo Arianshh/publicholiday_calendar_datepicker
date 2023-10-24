@@ -2,8 +2,8 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Public Holiday Calendar/Datepicker",
-    "summary": "Public holidays color changes in datepicker and calendar.",
+    "name": "Holiday Highlighter",
+    "summary": "Public holidays color changes in datepicker and in calendar.",
     "version": "15.0",
     "license": "LGPL-3",
     "category": "Human Resources/Time Off",

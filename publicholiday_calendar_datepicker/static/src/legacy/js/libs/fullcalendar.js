@@ -126,8 +126,8 @@ odoo.define('publicholiday_calendar_datepicker.fullcalendar', function (require)
                 this.events = this._computeEvents();
                 for (const [monthNumber, {calendar}] of Object.entries(this.months)) {
                     // /!\ TASHILGOSTAR IMP: to be compatible with jalali calendar system.
-                    const dateString = moment(this.currentDate).jYear() + "/" + (parseInt(monthNumber) + 1) + "/1";
-                    calendar.gotoDate(moment(dateString, "jYYYY/jM/jD").toDate());
+                    const dateString = moment(this.currentDate).year() + "/" + (parseInt(monthNumber) + 1) + "/1";
+                    calendar.gotoDate(moment(dateString, "YYYY/M/D").toDate());
                 }
                 this._setCursorOnEventDates();
                 this.datesRendered = true;

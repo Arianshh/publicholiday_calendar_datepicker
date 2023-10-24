@@ -1,6 +1,13 @@
 .bootstrap-datetimepicker-widget .datepicker table td.public-holiday {
     color: #fff !important;
-    background-color: #f00 !important;
+    background-color: red !important;
+    border: 1px solid #f1e0e0 !important;
+    opacity: 0.5 !important;
+
+}
+.bootstrap-datetimepicker-widget .datepicker table td.public-holiday.active{
+    color: #fff !important;
+    background-color: #a62ac4 !important;
     border: 1px solid #f1e0e0 !important;
     opacity: 0.5 !important;
 
