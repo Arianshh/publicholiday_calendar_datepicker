@@ -2044,9 +2044,9 @@ if ((version[0] <= 2 && version[1] < 17) || (version[0] >= 3)) {
                 if (this.getCalendar() === 'j') {
                     var yearsView = this.widget.find('.datepicker-years'),
                         yearsViewHeader = yearsView.find('th'),
-                        yearCaps = this._getStartEndYear(10, this._viewDate.year()),
-                        startYear = this._viewDate.clone().year(yearCaps[0]),
-                        endYear = this._viewDate.clone().year(yearCaps[1]);
+                        yearCaps = this._getStartEndYear(10, this._viewDate.jYear()),
+                        startYear = this._viewDate.clone().jYear(yearCaps[0]),
+                        endYear = this._viewDate.clone().jYear(yearCaps[1]);
                 } else {
                     var yearsView = this.widget.find('.datepicker-years'),
                         yearsViewHeader = yearsView.find('th'),
@@ -2093,9 +2093,9 @@ if ((version[0] <= 2 && version[1] < 17) || (version[0] >= 3)) {
                 if (this.getCalendar() === 'j') {
                     var decadesView = this.widget.find('.datepicker-decades'),
                         decadesViewHeader = decadesView.find('th'),
-                        yearCaps = this._getStartEndYear(100, this._viewDate.year()),
-                        startDecade = this._viewDate.clone().year(yearCaps[0]),
-                        endDecade = this._viewDate.clone().year(yearCaps[1]);
+                        yearCaps = this._getStartEndYear(100, this._viewDate.jYear()),
+                        startDecade = this._viewDate.clone().jYear(yearCaps[0]),
+                        endDecade = this._viewDate.clone().jYear(yearCaps[1]);
                 } else {
                     var decadesView = this.widget.find('.datepicker-decades'),
                         decadesViewHeader = decadesView.find('th'),
@@ -2148,12 +2148,11 @@ if ((version[0] <= 2 && version[1] < 17) || (version[0] >= 3)) {
             };
 
             TempusDominusBootstrap4.prototype._fillDate = function _fillDate() {
+                var daysView = this.widget.find('.datepicker-days'), daysViewHeader = daysView.find('th');
                 const request = async () => {
-                    const response = await fetch('/publicholiday_calendar_datepicker/get_holidays');
+                    const response = await fetch('/ds_publicholiday_calendar/get_holidays');
                     const json = await response.json();
-                    var daysView = this.widget.find('.datepicker-days'),
-                        daysViewHeader = daysView.find('th'),
-                        html = [];
+                    var html = [];
                     var currentDate = void 0,
                         row = void 0,
                         clsName = void 0,
@@ -2197,7 +2196,7 @@ if ((version[0] <= 2 && version[1] < 17) || (version[0] >= 3)) {
                         if (currentDate.weekday() === 0) {
                             row = $('<tr>');
                             if (this._options.calendarWeeks) {
-                                row.append('<td class="cw">' + currentDate.week() + '</td>');
+                                row.append('<td class="cw">' + currentDate.jWeek() + '</td>');
                             }
                             html.push(row);
                         }
@@ -2245,16 +2244,12 @@ if ((version[0] <= 2 && version[1] < 17) || (version[0] >= 3)) {
                     }
 
                     daysView.find('tbody').empty().append(html);
-
-                    this._updateMonths();
-
-                    this._updateYears();
-
-                    this._updateDecades();
-
                 }
 
                 request();
+                this._updateMonths();
+                this._updateYears();
+                this._updateDecades();
 
             };
 
@@ -2386,8 +2381,8 @@ if ((version[0] <= 2 && version[1] < 17) || (version[0] >= 3)) {
                     }
                     case 'selectYear': {
                         var year = parseInt($(e.target).text(), 10) || 0;
-                        if (this.getCalendar() === 'j' && this._viewDate.year) {
-                            this._viewDate.year(year)
+                        if (this.getCalendar() === 'j' && this._viewDate.jYear) {
+                            this._viewDate.jYear(year)
                         } else {
                             this._viewDate.year(year);
                         }
@@ -2405,8 +2400,8 @@ if ((version[0] <= 2 && version[1] < 17) || (version[0] >= 3)) {
                     }
                     case 'selectDecade': {
                         var _year = parseInt($(e.target).data('selection'), 10) || 0;
-                        if (this.getCalendar() === 'j' && this._viewDate.year) {
-                            this._viewDate.year(_year)
+                        if (this.getCalendar() === 'j' && this._viewDate.jYear) {
+                            this._viewDate.jYear(_year)
                         } else {
                             this._viewDate.year(_year);
                         }
