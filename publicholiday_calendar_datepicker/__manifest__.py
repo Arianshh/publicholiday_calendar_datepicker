@@ -9,7 +9,7 @@
     "category": "Human Resources",
     "author": "Arian Shariat",
     "website": "https://github.com/OCA/hr-holidays",
-    "depends": ["ds_time_off", "ds_persian_calendar"],
+    "depends": ["hr_holidays"],
     'css': ['static/src/css/style.css'],
     "data": [
         "data/data.xml",
