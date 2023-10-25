@@ -1,22 +1,23 @@
-# Copyright 2015 2011,2013 Michael Telahun Makonnen <mmakonnen@gmail.com>
-# Copyright 2020 InitOS Gmbh
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+# Copyright 2023 Arian Shariat <arian.shariat@gmail.com>
+# License LGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Holidays Calendar",
-    "version": "15.0.1.1.1",
-    "license": "AGPL-3",
-    "category": "Human Resources",
+    "name": "Holiday Highlighter",
+    "summary": "Public holidays color changes in datepicker and in calendar.",
+    "version": "15.0",
+    "license": "LGPL-3",
+    "category": "Human Resources/Time Off",
     "author": "Arian Shariat",
-    "website": "https://github.com/OCA/hr-holidays",
+    "website": "https://github.com/Arianshh",
     "depends": ["hr_holidays"],
-    'css': ['static/src/css/style.css'],
+    "css": ['static/src/css/style.css'],
+    'images': ['static/description/header.jpeg'],
     "data": [
         "data/data.xml",
     ],
     'assets': {
         'web.assets_backend': [
-            'ds_publicholiday_calendar/static/src/css/style.css',
+            'publicholiday_calendar_datepicker/static/src/css/style.css',
         ],
         'web.assets_common': [
             "ds_publicholiday_calendar/static/src/legacy/js/libs/fullcalendar.js",
@@ -27,4 +28,5 @@
     },
 
     "installable": True,
+    "application": True,
 }
